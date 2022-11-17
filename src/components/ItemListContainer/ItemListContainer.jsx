@@ -1,4 +1,5 @@
-import './ItemListContainer.scss'
+import './ItemListContainer.scss';
+import { useParams } from 'react-router-dom';
 const ItemListContainer = (props) => {
   return (
     <div className="saludo">

@@ -2,6 +2,7 @@ import CartWidget from "../CartWidget/CartWidget";
 import logoPrincipal from "../../assests/logo.svg";
 import menuIcono from "../../assests/menu.svg";
 import './NavBar.scss'
+import { NavLink,Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div className="navbar">
@@ -13,16 +14,16 @@ const NavBar = () => {
       </div>
       <div className="navbar__lista">
         <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Products</a></li>
-          <li><a href="">About us</a></li>
-          <li><a href="">Contact</a></li>
-          <li><a href="">Log in</a></li>
-          <li><a href="">sign in</a></li>
+          <li><NavLink to={'/'} activeClassName='activee'>Home</NavLink></li>
+          <li><NavLink to={'/Products'} activeClassName = 'active'>Products</NavLink></li>
+          <li><NavLink to={'/About'} activeClassName = 'active'>About us</NavLink></li>
+          <li><NavLink to={'/Contact'} activeClassName = 'active'>Contact</NavLink></li>
+          <li><NavLink to={'/Log'} activeClassName = 'active'>Log in</NavLink></li>
+          <li><NavLink to={'/Sign'} activeClassName = 'active'>Sign in</NavLink></li>
         </ul>
       </div>
       
-      <CartWidget/>
+      <Link to="/Cart"><CartWidget/></Link>
 
     </div>
   )
