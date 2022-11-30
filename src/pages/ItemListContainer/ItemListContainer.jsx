@@ -6,26 +6,24 @@ import { useEffect, useState } from 'react';
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const {categoryName} = useParams();
-  // console.log(categoryName);
-  const getProducts = new Promise((resolve,reject)=>{
+  console.log(categoryName);
+  const getProducts = new Promise((resolve)=>{
 
-    setTimeout(()=>{
-      if(categoryName){
-        const filteredData = data.filter((item)=>{
-          return item.category === categoryName;
-        });
-        resolve(filteredData);
-      }else{
-        // console.log (data);
-        resolve(data);
-      }
-    },1000);
-    
+    if(categoryName){
+      const filteredData = data.filter((item)=>{
+        return item.category === categoryName;
+      });
+      console.log (filteredData);
+      resolve(filteredData);
+    }else{
+      resolve(data);
+    }
     
   });
 
   
   useEffect(()=>{
+    
     getProducts
     .then((res)=>{
       setItems(res);
