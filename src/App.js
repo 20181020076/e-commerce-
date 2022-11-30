@@ -1,9 +1,9 @@
 import NavBar from './components/NavBar/NavBar';
 import Cart from './pages/Cart/Cart';
-import Products from './pages/Products/Products';
-import ItemListContainer from './components/ItemListContainer/ItemListContainer';
-import About from './pages/About/About';
-import Contact from './pages/Contact/Contact';
+import Home from './pages/Home/Home';
+import ItemListContainer from './pages/ItemListContainer/ItemListContainer';
+// import About from './pages/About/About';
+// import Contact from './pages/Contact/Contact';
 
 // import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import './App.css';
@@ -18,11 +18,12 @@ function App() {
       <BrowserRouter>
         <NavBar/>
         <Routes>
-          <Route path='/' element={<ItemListContainer/>}/>
+          <Route path='/' element={<Home/>}/>
           <Route path='/Cart' element={<Cart/>}/>
-          <Route path='/Products' element={<Products/>}/>
-          <Route path='/About' element={<About/>}/>
-          <Route path='/Contact' element={<Contact/>}/>
+          <Route path='/Products/:categoryName' element={<ItemListContainer/>}/>
+          <Route path='/Products' element={<ItemListContainer/>}/>
+          <Route path='/detail/:id' element={<ItemListContainer/>}/>
+          {/* <Route path='/Contact' element={<Contact/>}/> */}
         </Routes>
       </BrowserRouter>
     </div>
