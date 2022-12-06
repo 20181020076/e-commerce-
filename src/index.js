@@ -11,22 +11,22 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDMAXdhW0ZT3d2KKXa8QWiXfzCbcO83H-g",
-  authDomain: "coder-ecommerce-a26fa.firebaseapp.com",
-  projectId: "coder-ecommerce-a26fa",
-  storageBucket: "coder-ecommerce-a26fa.appspot.com",
-  messagingSenderId: "707650926740",
-  appId: "1:707650926740:web:4d08616baa976d8859dc81"
+  apiKey: "AIzaSyDuMnAFSi8qaI8L69pBHwgNZhFEn_yRlRk",
+  authDomain: "primal-1570c.firebaseapp.com",
+  projectId: "primal-1570c",
+  storageBucket: "primal-1570c.appspot.com",
+  messagingSenderId: "711739643365",
+  appId: "1:711739643365:web:f37dce5cc38fce7d690b0c"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  //<React.StrictMode>
+  <React.StrictMode>
     <App />
-  //</React.StrictMode> 
+  </React.StrictMode> 
 );
 
 // If you want to start measuring performance in your app, pass a function

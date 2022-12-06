@@ -1,39 +1,46 @@
 import './ItemListContainer.scss';
 import { useParams } from 'react-router-dom';
 import ItemList from '../../components/ItemList/ItemList';
-import {data} from '../../data/data';
 import { useEffect, useState } from 'react';
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
+
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const {categoryName} = useParams();
-  console.log(categoryName);
-  const getProducts = new Promise((resolve)=>{
+  const getProducts = () => {
+    const db = getFirestore();
+    const queryBase = collection(db, 'items');
 
-    if(categoryName){
-      const filteredData = data.filter((item)=>{
-        return item.category === categoryName;
+    const querySnapshot = categoryName
+      ? query(queryBase, where('category', '==', categoryName))
+      : queryBase;
+
+    getDocs(querySnapshot)
+      .then((response) => {
+        const data = response.docs.map((item) => {
+          return { id: item.id, ...item.data() };
+        });
+        setItems(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      console.log (filteredData);
-      resolve(filteredData);
-    }else{
-      resolve(data);
-    }
-    
-  });
+  };
 
   
-  useEffect(()=>{
-    
-    getProducts
-    .then((res)=>{
-      setItems(res);
-    })
-    .catch((error)=>{console.log(error)});
-  },[categoryName]);
+  useEffect(() => {
+    getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryName]);
 
-  return (
-    <ItemList products={items}/>
-  )
+  return <div>{<ItemList products={items} />}</div>;
 }
 
 export default ItemListContainer
