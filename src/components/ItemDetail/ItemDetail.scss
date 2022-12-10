@@ -1,0 +1,16 @@
+.detail{
+    border: 1px solid red;
+    &__container{
+        display: flex;
+        justify-content: center;
+        border: 1px solid red;
+        &__image{
+            border: 1px solid red;
+            
+        }
+        &__description{
+            padding-left: 25px;
+        }
+    }
+
+}

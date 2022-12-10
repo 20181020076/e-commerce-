@@ -1,0 +1,19 @@
+.cart{
+    display: flex;
+    min-height: 70vh;
+    &__list{
+        border: 1px solid red;
+        width: 70%;
+        flex-wrap: wrap;
+        display: flex;
+
+        &__item{
+            border: 1px solid red;
+            width: 300px;
+        }
+    }
+    &__form{
+        border: 1px solid peru;
+        width: 50%;
+    }
+}

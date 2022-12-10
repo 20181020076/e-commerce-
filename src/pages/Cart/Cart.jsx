@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { cartContext } from '../../context/CartProvider';
+import "./Cart.scss"
 import {
   collection,
   addDoc,
@@ -28,31 +29,37 @@ const Cart = () => {
   const createOrder = () => {
     const db = getFirestore();
     const query = collection(db, 'Order');
-    const newOrder = {
-      buyer: {
-        name: formValues.name,
-        phone: formValues.phone,
-        email: formValues.email,
-      },
-      date: moment().format('DD/MM/YYYY'),
-      items: cart,
-      total: total,
-    };
-    addDoc(query, newOrder)
-      .then((response) => {
-        alert(`Orden creada con el id ${response.id}`);
-        return response;
-      })
-      .then((res) => {
-        cart.forEach((product) => {
-          const query = doc(db, 'items', product.id);
-          updateDoc(query, {
-            stock: product.stock - product.quantity,
+    //console.log(formValues.phone === "")
+    if(formValues.name === '' || formValues.phone === '' || formValues.email === ''){
+      alert("rellene todos los campos del formulario")
+    }else{
+      const newOrder = {
+        buyer: {
+          name: formValues.name,
+          phone: formValues.phone,
+          email: formValues.email,
+        },
+        date: moment().format('DD/MM/YYYY'),
+        items: cart,
+        total: total,
+      };
+      addDoc(query, newOrder)
+        .then((response) => {
+          alert(`Orden creada con el id ${response.id}`);
+          return response;
+        })
+        .then((res) => {
+          cart.forEach((product) => {
+            const query = doc(db, 'items', product.id);
+            updateDoc(query, {
+              stock: product.stock - product.quantity,
+            });
           });
-        });
-        // const orderDoc = doc(db, 'items',);
-      })
-      .catch((error) => console.log(error));
+          // const orderDoc = doc(db, 'items',);
+        })
+        .catch((error) => console.log(error));
+    }
+
   };
   useEffect(() => {
     getTotalPrice();
@@ -67,35 +74,27 @@ const Cart = () => {
     });
   };
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-around',
-      }}
-    >
-      {cart.map((product) => (
-        <div
-          key={product.id}
-          style={{
-            marginTop: '20px',
-            padding: '40px',
-            border: '1px solid gray',
-          }}
-        >
-          <img
-            alt={product.category}
-            src={`/images/${product.image}`}
-            width={'150px'}
-          />
-          <h2>{product.name}</h2>
-          <h2>{product.price}</h2>
-          <h2>{product.description}</h2>
-          <h2>{product.quantity}</h2>
-        </div>
-      ))}
-      <div>
+    <div className='cart'>
+      <div className='cart__list'>
+        {cart.map((product) => (
+          <div
+            key={product.id}
+            className="cart__list__item"
+          >
+            <img
+              alt={product.category}
+              src={`/images/${product.image}`}
+              width={'150px'}
+            />
+            <h2>{product.name}</h2>
+            <h2>{product.price}</h2>
+            <h2>{product.description}</h2>
+            <h2>{product.quantity}</h2>
+          </div>
+        ))}
+      </div>
+      
+      <div className='cart__form'>
         <h1>Total: {total} </h1>
         <button onClick={createOrder}>Crear orden</button>
         <div>

@@ -1,4 +1,5 @@
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
 import Cart from './pages/Cart/Cart';
 import Home from './pages/Home/Home';
 import ItemListContainer from './pages/ItemListContainer/ItemListContainer';
@@ -28,6 +29,7 @@ function App() {
           
           {/* <Route path='/Contact' element={<Contact/>}/> */}
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </CartProvider>
   );

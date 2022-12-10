@@ -1,7 +1,7 @@
 export const data = [
     {
         id:1,
-        name:'camisa perro',
+        name:'camiseta perro',
         color:'roja',
         price:50000,
         stock:10,

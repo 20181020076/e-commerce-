@@ -40,7 +40,7 @@ const ItemListContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryName]);
 
-  return <div>{<ItemList products={items} />}</div>;
+  return <div className="list_container">{<ItemList products={items} />}</div>;
 }
 
 export default ItemListContainer
